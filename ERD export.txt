@@ -1,0 +1,44 @@
+﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
+
+
+CREATE TABLE "Master" (
+    "Job_ID" varchar(20)   NOT NULL,
+    "Job_Title" varchar(50)   NOT NULL,
+    "Company" varcar(50)   NOT NULL,
+    "Salary_Low" int   NOT NULL,
+    "Salary_High" int   NOT NULL,
+    "Job_Description" varchar(100)   NOT NULL,
+    "Job_Post_URL" varchar(100)   NOT NULL,
+    "Post_date" date   NOT NULL,
+    "City" varchar(20)   NOT NULL,
+    "State_ID" varchar(10)   NOT NULL,
+    "Last_updated" timestamp   NOT NULL,
+    CONSTRAINT "pk_Master" PRIMARY KEY (
+        "Job_ID"
+     )
+);
+
+CREATE TABLE "Job_Post_Source" (
+    "Source_ID" varchar(20)   NOT NULL,
+    "Source_Name" varchar(10)   NOT NULL,
+    "Source_URL" varchar(50)   NOT NULL,
+    "Last_updated" timestamp   NOT NULL,
+    CONSTRAINT "pk_Job_Post_Source" PRIMARY KEY (
+        "Source_ID"
+     )
+);
+
+CREATE TABLE "State" (
+    "State_ID" varchar(10)   NOT NULL,
+    "State_Name" varchar(20)   NOT NULL,
+    "State_Abbr" varchar(2)   NOT NULL,
+    "Last_updated" timestamp   NOT NULL,
+    CONSTRAINT "pk_State" PRIMARY KEY (
+        "State_ID"
+     )
+);
+
+ALTER TABLE "Master" ADD CONSTRAINT "fk_Master_State_ID" FOREIGN KEY("State_ID")
+REFERENCES "State" ("State_ID");
+
