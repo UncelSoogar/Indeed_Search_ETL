@@ -1,0 +1,76 @@
+
+###########################
+PROJECT DESIGN AND CONCEPTS
+###########################
+
+
+###########################
+Use splinter and chromedriver to navigate to indeed job search.
+Indeed:
+
+    Initial
+
+        Search params:
+            No location
+            Entry Level
+            "Data Scientist"
+            Past 3 days
+
+        Fields to scrape:
+            Posting URL
+            Job title
+            Company Name
+            Location (split into city and state)
+            Date posted (timestamp minus "x days posted ago")
+            Salary (split into high and low)
+            Job Abstract
+
+
+        Save as csv to be uploaded once DB architecture designed and up.
+
+    Live Update 00:01 everyday:
+        Search params:
+            No location
+            Entry Level
+            "Data Scientist"
+            Past 24 hours
+
+        Upload scrapped data into db
+
+
+#############################
+DB architecture
+
+·       Master
+o  Job ID PK SERIAL
+o  Job Title
+o  Company
+o  Salary Low
+o  Salary High
+o  Job Description
+o  Job Post URL
+o  Post_date (date scraped?)
+o  City ?
+o  State ID as FK
+o  Last_updated
+
+·       Job Post Source:
+o  Source ID PK SERIAL
+o  Source Name
+o  Source URL (indeed.com, monster.com)
+o  Last_updated
+
+·       State
+o  State ID PK SERIAL
+o  State Name
+o  State Abbr
+o  Last_updated
+
+    City
+City ID PK SERIAL
+City Name
+Last_updated
+
+
+###############################
+Loading to front end:
